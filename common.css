@@ -1,0 +1,94 @@
+/* =========================================================
+   喵字帖 - 全站共享样式
+   统一：品牌主题色、页头、返回首页链接、页脚
+   由 bihua.html / chaozi.html / pinyin.html / tingxie.html /
+   mingtie.html / kousuan.html 共同引用（index.html 首页除外，
+   首页是独立设计的导航页）
+   ========================================================= */
+
+:root {
+    --brand-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --brand-primary: #667eea;
+    --brand-primary-dark: #764ba2;
+}
+
+/* ===== 页头 ===== */
+.header {
+    background: var(--brand-gradient);
+    color: white;
+    padding: 28px 30px 24px;
+    text-align: center;
+}
+
+/* 返回首页链接 - 每个功能页唯一的导航入口 */
+.header .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 12px;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.25s;
+}
+
+.header .back-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(-3px);
+}
+
+.header h1 {
+    font-size: 2.2em;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.header p {
+    font-size: 1em;
+    opacity: 0.9;
+}
+
+/* ===== 页脚 ===== */
+.footer {
+    background: #f8f9fa;
+    border-top: 2px solid #e9ecef;
+    padding: 18px 20px;
+    text-align: center;
+    font-size: 12.5px;
+    color: #666;
+    line-height: 1.8;
+}
+
+.footer a {
+    color: var(--brand-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 600px) {
+    .header {
+        padding: 20px 16px 18px;
+    }
+
+    .header h1 {
+        font-size: 1.6em;
+    }
+}
+
+/* ===== 打印时统一隐藏页头/页脚 ===== */
+@media print {
+
+    .header,
+    .footer {
+        display: none;
+    }
+}

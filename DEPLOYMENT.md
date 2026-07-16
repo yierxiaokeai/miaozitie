@@ -65,11 +65,11 @@ git push -u origin main
 
 #### 2. 准备文件
 
-将以下文件打包（不需要 .git 目录）：
-- `stroke-by-stroke.html`
-- `ziku.txt`
-- `README.md`
-- `.cursor/` 目录（可选）
+将根目录下的全部文件打包上传（不需要 .git 目录），包括：
+- `index.html`、`bihua.html`、`chaozi.html`、`pinyin.html`、`tingxie.html`、`mingtie.html`、`kousuan.html`
+- `common.css`、`ziku-data.js`
+- `hanzi-writer.min.js`、`pinyin-pro.min.js`、`tf.min.js`、`mnist-model/`
+- `ziku.txt`、`README.md`
 
 #### 3. 上传并部署
 
@@ -102,6 +102,14 @@ git push
 
 本项目是纯前端静态页面，不需要配置环境变量。
 
+## 🧪 关于 AI 内容小助手（`ai-zhushou.html` / `ai-engine.js`）
+
+`ai-zhushou.html` 负责加载模型和提供对话调试窗口；实际的模型加载/生成逻辑封装在共享文件 `ai-engine.js` 里，`tingxie.html`、`moxie.html` 等页面也会 import 它来实现各自的"AI 辅助生成"入口。这几个页面在运行时会通过 `<script type="module">` 从 jsDelivr CDN 加载 Transformers.js，并从 Hugging Face Hub 下载一个约 500MB+ 的 MiniCPM5-1B 浏览器版大模型，完全在用户浏览器本地运行推理。
+
+- **不需要额外部署步骤**：模型文件和 `ai-engine.js` 都不需要特殊处理，`ai-engine.js` 只是一个几 KB 的普通静态文件，正常按上面的步骤部署即可
+- **不受 25MB 单文件限制影响**：真正的模型权重是运行时从 HF Hub 直接下载到用户浏览器，不经过本站服务器，也不在仓库里
+- **该功能依赖外部服务可用性**：如果 Hugging Face Hub 或该模型仓库不可访问，这几个页面的 AI 生成功能会加载失败（其余所有页面不受影响，仍可离线/正常使用）
+
 ## 🎯 访问你的网站
 
 部署成功后，你的网站地址将是：
@@ -120,7 +128,7 @@ Cloudflare Pages 自动提供：
 ## 🐛 常见问题
 
 ### Q: 页面显示 404
-A: 确保 `stroke-by-stroke.html` 在根目录，或者设置为默认首页
+A: 确保 `index.html` 在根目录（大多数静态托管平台会自动将其作为默认首页）
 
 ### Q: 外部库加载失败
 A: 本项目使用 CDN 加载 Hanzi Writer 和 Pinyin Pro，确保网络连接正常
